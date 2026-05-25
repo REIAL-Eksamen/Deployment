@@ -1,0 +1,23 @@
+# Rider / JetBrains
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+
+# Logs
+*.log
+
+# Docker override files
+docker-compose.override.yml
