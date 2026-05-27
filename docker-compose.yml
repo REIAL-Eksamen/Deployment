@@ -75,6 +75,9 @@ services:
       - ASPNETCORE_URLS=http://+:8080
       - MongoDB__DatabaseName=ClassDB
       - MongoDB__CollectionName=ClassCollection
+      - Jwt__Key=this-is-a-development-secret-key-with-enough-length
+      - Jwt__Issuer=FitLife
+      - Jwt__Audience=FitLifeUsers
     depends_on:
       - mongodb
 
@@ -91,6 +94,9 @@ services:
       - MongoDB__CollectionName=BookingCollection
       - UserService__BaseUrl=http://userservice:8080
       - ClassService__BaseUrl=http://classservice:8080
+      - Jwt__Key=this-is-a-development-secret-key-with-enough-length
+      - Jwt__Issuer=FitLife
+      - Jwt__Audience=FitLifeUsers
     depends_on:
       - mongodb
       - userservice
@@ -107,6 +113,9 @@ services:
       - ASPNETCORE_URLS=http://+:8080
       - MongoDB__DatabaseName=AdminDB
       - MongoDB__CollectionName=AdminCollection
+      - Jwt__Key=this-is-a-development-secret-key-with-enough-length
+      - Jwt__Issuer=FitLife
+      - Jwt__Audience=FitLifeUsers
     depends_on:
       - mongodb
 
