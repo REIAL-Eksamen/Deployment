@@ -79,11 +79,13 @@ services:
       - ASPNETCORE_URLS=http://+:8080
       - MongoDB__DatabaseName=ClassDB
       - MongoDB__CollectionName=ClassCollection
+      - AdminService__BaseUrl=http://adminservice:8080
       - Jwt__Key=this-is-a-development-secret-key-with-enough-length
       - Jwt__Issuer=FitLife
       - Jwt__Audience=FitLifeUsers
     depends_on:
       - mongodb
+      - adminservice
 
   bookingservice:
     build: ../BookingService
