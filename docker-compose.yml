@@ -1,4 +1,11 @@
 services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: fitlife-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
   mongodb:
     image: mongo:latest
     container_name: fitlife-mongodb
@@ -35,7 +42,7 @@ services:
   authservice:
     build: ../AuthService
     ports:
-      - "5000:8080"
+      - "5005:8080"
     env_file:
       - .env
     environment:
@@ -48,8 +55,10 @@ services:
       - Jwt__Audience=FitLifeUsers
       - VAULT_ADDR=http://vault:8200
       - VAULT_TOKEN=myroot
+      - RabbitMQ__Host=rabbitmq
     depends_on:
       - mongodb
+      - rabbitmq
 
   userservice:
     build: ../UserService/UserService
@@ -65,8 +74,10 @@ services:
       - Jwt__Key=this-is-a-development-secret-key-with-enough-length
       - Jwt__Issuer=FitLife
       - Jwt__Audience=FitLifeUsers
+      - RabbitMQ__Host=rabbitmq
     depends_on:
       - mongodb
+      - rabbitmq
 
   classservice:
     build: ../ClassService/ClassService
@@ -83,8 +94,10 @@ services:
       - Jwt__Key=this-is-a-development-secret-key-with-enough-length
       - Jwt__Issuer=FitLife
       - Jwt__Audience=FitLifeUsers
+      - RabbitMQ__Host=rabbitmq
     depends_on:
       - mongodb
+      - rabbitmq
       - adminservice
 
   bookingservice:
@@ -103,8 +116,10 @@ services:
       - Jwt__Key=this-is-a-development-secret-key-with-enough-length
       - Jwt__Issuer=FitLife
       - Jwt__Audience=FitLifeUsers
+      - RabbitMQ__Host=rabbitmq
     depends_on:
       - mongodb
+      - rabbitmq
       - userservice
       - classservice
 
